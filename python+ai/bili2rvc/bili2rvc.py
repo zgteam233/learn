@@ -336,7 +336,7 @@ def cleanup():
 def bili2rvc():
 
     url = input_with_default(
-        "请输入 B 站视频链接（直接回车使用默认）:",
+        f"请输入 B 站视频链接（直接回车使用默认: {DEFAULT_URL}）",
         DEFAULT_URL
     )
 
