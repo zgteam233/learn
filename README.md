@@ -16,7 +16,6 @@ Copyright (c) 2025-2026
 
 licensed under the
 
-- Apache-2.0 license
 - GPL-3.0 license
 - MIT license
 
