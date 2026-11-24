@@ -196,7 +196,7 @@ def load_rvc_model(client):
         print(f"  - {model}")
 
     model = input_with_default(
-        "选取模型:",
+        f"选取模型 (默认=={DEFAULT_MODEL})",
         DEFAULT_MODEL
     )
 
@@ -226,10 +226,10 @@ def load_rvc_model(client):
 def rvc_convert(client):
     print("开始 RVC 音频转换...")
 
-    pitch = int(input_with_default("变调:", "-12"))
+    pitch = int(input_with_default("变调 (默认==-12)", "-12"))
 
     index = input_with_default(
-        "选取索引:",
+        f"选取索引(默认=={DEFAULT_INDEX})\n",
         DEFAULT_INDEX
     )
 
@@ -238,7 +238,7 @@ def rvc_convert(client):
     result = rvc_api_call(
         client,
         0,                          # speaker ID
-        str(VOCAL),    # 输入音频
+        str(VOCAL),                 # 输入音频
         pitch,                      # 变调
         "rmvpe",                    # 音高提取算法
         index_path,                 # index 文件
@@ -297,7 +297,11 @@ def mix_audio():
             "-i", str(NOVOCALS),
             "-filter_complex",
             "[0:a]volume=1.0[v];"
-            "[1:a]volume=0.8[b];"
+            f"[1:a]volume={float(
+                input_with_default(
+                    "伴奏/人声 (默认==0.8)",
+                    "0.8"
+                ))}[b];"
             "[v][b]amix=inputs=2:duration=longest:normalize=0[a]",
             "-map", "[a]",
             "-c:a", "pcm_s16le",
